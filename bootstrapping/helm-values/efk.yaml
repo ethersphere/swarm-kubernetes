@@ -1,0 +1,60 @@
+# Default values for efk.
+
+# https://github.com/komljen/helm-charts/blob/master/kibana/values.yaml
+kibana:
+  image:
+    repository: "docker.elastic.co/kibana/kibana-oss"
+    tag: "6.4.2"
+  env:
+    # All Kibana configuration options are adjustable via env vars.
+    # To adjust a config option to an env var uppercase + replace `.` with `_`
+    # Ref: https://www.elastic.co/guide/en/kibana/current/settings.html
+    #
+    ELASTICSEARCH_URL: http://elasticsearch-efk-cluster:9200
+    SERVER_PORT: 5601
+    LOGGING_VERBOSE: "true"
+    SERVER_DEFAULTROUTE: "/app/kibana"
+
+# https://github.com/komljen/helm-charts/blob/master/elasticsearch/values.yaml
+elasticsearch:
+  image:
+    repository: quay.io/pires/docker-elasticsearch-kubernetes
+    tag: "6.4.2"
+  name: efk-cluster
+  clientReplicas: 1
+  masterReplicas: 1
+  dataReplicas: 1
+  dataVolumeSize: 100Gi
+  javaOpts: "-Xms1024m -Xmx1024m"
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: 200m
+    limits:
+      memory: 2048Mi
+      cpu: '1'
+  storage:
+    type: gp2
+    classProvisioner: kubernetes.io/aws-ebs
+    reclaimPolicy: Delete
+  cerebro:
+    enabled: true
+    image: upmcenterprises/cerebro:0.6.8
+
+# https://github.com/kubernetes/charts/blob/master/stable/fluent-bit/values.yaml
+fluent-bit:
+  image:
+    fluent_bit:
+      repository: fluent/fluent-bit
+      tag: 0.14.7
+  existingConfigMap: efk-fluent-bit-custom-config
+  trackOffsets: true
+  backend:
+    type: es
+    es:
+      host: elasticsearch-efk-cluster
+      port: 9200
+      index: kubernetes_cluster
+      logstash_prefix: kubernetes_cluster
+  rbac:
+    create: true

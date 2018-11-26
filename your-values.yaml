@@ -1,0 +1,31 @@
+swarm:
+  metricsEnabled: true
+  tracingEnabled: false
+  profilingEnabled: false
+  image:
+    repository: ethdevops/swarm
+    tag: latest
+  replicaCount: 2
+  config:
+    ens_api: http://mainnet-geth-geth.geth:8545
+    verbosity: 3
+    debug: true
+    maxpeers: 25
+    bzznetworkid: 3
+    bootnodes: []
+  secrets:
+    password: qwerty
+  persistence:
+    enabled: false
+  ingress:
+    domain: your-domain.com
+    enabled: true
+    tls:
+      acmeEnabled: true
+  resources:
+    requests:
+      memory: 4Gi
+      cpu: 1
+    limits:
+      memory: 4Gi
+      cpu: 2

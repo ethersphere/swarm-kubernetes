@@ -1,0 +1,28 @@
+{{- range .items }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-{{.metadata.name}}
+spec:
+  capacity:
+    storage: 450Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /datadrive
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: beta.kubernetes.io/instance-type
+          operator: In
+          values:
+          - i3.large
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - {{.metadata.name}}
+{{end}}

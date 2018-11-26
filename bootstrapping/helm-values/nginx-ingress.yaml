@@ -1,0 +1,50 @@
+controller:
+  replicaCount: 2
+  minAvailable: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  service:
+    enableHttp: true
+    enableHttps: true
+    externalTrafficPolicy: "Local"
+    targetPorts:
+      http: http
+      https: https
+    type: LoadBalancer
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+  extraContainers: []
+  extraInitContainers: []
+  extraVolumes: []
+  extraVolumeMounts: []
+  stats:
+    enabled: false
+  metrics:
+    enabled: false
+
+defaultBackend:
+  enabled: true
+  name: default-backend
+  image:
+    repository: k8s.gcr.io/defaultbackend
+    tag: "1.4"
+    pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+rbac:
+  create: true
