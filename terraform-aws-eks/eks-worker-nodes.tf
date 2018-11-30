@@ -154,7 +154,8 @@ USERDATA
 mkdir -p /datadrive
 chmod 755 /datadrive
 mkfs -t ext4 /dev/nvme0n1
-mount /dev/nvme0n1 /datadrive
+echo "/dev/nvme0n1 /datadrive ext4 defaults 0 2" >> /etc/fstab
+mount /datadrive
 
 echo '{ "log-driver": "json-file", "log-opts": { "max-size": "20m", "max-file": "10" }}' > /etc/docker/daemon.json
 systemctl restart docker
