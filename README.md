@@ -102,10 +102,10 @@ You'll need access to a k8s cluster and the following binaries on your system:
 
 ### Using the Helm charts
 
-To be able to use our Helm charts you need to load them from our registry first:
+To be able to use the [Ethersphere Helm charts](https://github.com/ethersphere/helm-charts), you need to load them from our registry first:
 
 ```sh
-helm repo add ethersphere-charts https://ethersphere.github.io/helm-charts-artifacts/
+helm repo add ethersphere-charts https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/
 helm repo list
 ```
 

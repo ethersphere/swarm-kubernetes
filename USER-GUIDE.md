@@ -75,14 +75,10 @@ kubectl get nodes
 
 ## Ethersphere Helm Charts
 
-- [geth](https://github.com/ethersphere/helm-charts/tree/master/geth)
-- [swarm](https://github.com/ethersphere/helm-charts/tree/master/swarm)
-- [swarm-private](https://github.com/ethersphere/helm-charts/tree/master/swarm-private)
-
-To be able to use the Ethersphere Helm charts, you need to load them from our registry first:
+To be able to use the [Ethersphere Helm charts](https://github.com/ethersphere/helm-charts), you need to load them from our registry first:
 
 ```sh
-helm repo add ethersphere-charts https://ethersphere.github.io/helm-charts-artifacts/
+helm repo add ethersphere-charts https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/
 helm repo list
 ```
 
