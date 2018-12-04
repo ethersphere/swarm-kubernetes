@@ -18,6 +18,10 @@ kubectl apply -f tiller-admin-rbac.yaml
 helm init --tiller-namespace=kube-system --service-account tiller
 kubectl -n kube-system wait --timeout=120s --for condition=ready pod -l app=tiller
 
+
+# Add helm repos
+helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+
 # Update information of available charts locally from chart repositories
 helm repo update
 
@@ -53,5 +57,8 @@ helm install --namespace logging \
              --name elasticsearch-curator stable/elasticsearch-curator --version=1.0.1 \
              --values helm-values/elasticsearch-curator.yaml
 
+# Install spot instance termination handler
+helm install --namespace kube-system \
+             --name spot-termination incubator/kube-spot-termination-notice-handler --version=0.4.0
 
 # TODO: Install monitoring stack
