@@ -13,7 +13,7 @@ This document is targeted at developers who want to use a Kubernetes environment
 
 ### Requirements
 
-#### Install aws-cli
+#### Install aws-cli >= 1.16
 
 https://aws.amazon.com/cli/
 
