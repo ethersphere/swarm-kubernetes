@@ -26,9 +26,11 @@ export AWS_ACCESS_KEY_ID="xxx"
 export AWS_SECRET_ACCESS_KEY="xxx"
 ```
 
-#### Install aws-iam-authenticator
+#### Install [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
 
-https://github.com/kubernetes-sigs/aws-iam-authenticator
+```
+go get -u -v github.com/kubernetes-sigs/aws-iam-authenticator/cmd/aws-iam-authenticator
+```
 
 Make sure you copy the aws-iam-authenticator binary in your PATH.
 
