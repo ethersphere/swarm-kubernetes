@@ -52,7 +52,7 @@ export NAMESPACE=your-namespace
 #### Install `kubectl` and `helm`
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [helm](https://github.com/helm/helm)
+- [helm](https://github.com/helm/helm#install)
 
 ## Configure kubectl
 
