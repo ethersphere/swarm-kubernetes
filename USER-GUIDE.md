@@ -122,10 +122,13 @@ kubectl -n $NAMESPACE apply -f tiller.rbac.yaml
 helm init --service-account tiller --tiller-namespace $NAMESPACE
 
 # Install sample Swarm chart. It may take longer, like a couple of minutes
-helm --tiller-namespace=$NAMESPACE \
-     --namespace=$NAMESPACE \
-     --name=swarm install ethersphere-charts/swarm \
-     -f your-values.yaml
+helm --tiller-namespace=$NAMESPACE --namespace=$NAMESPACE --name=swarm install ethersphere-charts/swarm -f your-values.yaml
+
+# Upgrade sample Swarm chart
+helm --tiller-namespace=$NAMESPACE --namespace=$NAMESPACE upgrade swarm ethersphere-charts/swarm -f your-values.yaml
+
+# List helm applications
+helm list --tiller-namespace $NAMESPACE
 
 # Tear-down Swarm deployment
 helm del --purge swarm --tiller-namespace $NAMESPACE
@@ -133,14 +136,6 @@ helm del --purge swarm --tiller-namespace $NAMESPACE
 # ... or remove k8s namespace altogether
 kubectl delete namespace $NAMESPACE
 
-# Upgrade sample Swarm chart
-helm --tiller-namespace=$NAMESPACE \
-     --namespace=$NAMESPACE \
-     upgrade swarm ethersphere-charts/swarm \
-     -f your-values.yaml
-
-# List helm applications
-helm list --tiller-namespace $NAMESPACE
 ```
 
 ## Useful commands
