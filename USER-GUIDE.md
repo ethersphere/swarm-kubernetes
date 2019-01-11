@@ -105,34 +105,8 @@ cd swarm-cluster/kubernetes
 
 ## Configure your sample Swarm deployment
 
-```
-# your-values.yaml
-
-swarm:
-  metricsEnabled: true
-  tracingEnabled: false
-  profilingEnabled: false
-  image:
-    repository: ethdevops/swarm
-    tag: latest
-  replicaCount: 2
-  config:
-    ens_api: http://mainnet-geth-geth.geth:8545
-    verbosity: 3
-    debug: true
-    maxpeers: 25
-    bzznetworkid: 3
-    bootnodes: []
-  secrets:
-    password: qwerty
-  persistence:
-    enabled: false
-  ingress:
-    domain: your-domain.com
-    enabled: true
-    tls:
-      acmeEnabled: true
-```
+If you're in the right directory, you can use the file [your-values.yaml](https://github.com/ethereum/swarm-cluster/blob/master/kubernetes/your-values.yaml) as is.
+If you want to customize it, you can see all possible settings in [values.yaml](https://github.com/ethersphere/helm-charts/blob/master/swarm/values.yaml).
 
 ## Deploy sample Swarm chart
 ```sh
