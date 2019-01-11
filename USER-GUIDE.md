@@ -96,6 +96,12 @@ To be able to use the [Ethersphere Helm charts](https://github.com/ethersphere/h
 helm repo add ethersphere-charts https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/
 helm repo list
 ```
+## Make sure you're in the right kubernetes repository
+
+```
+git clone git@github.com:ethereum/swarm-cluster.git
+cd swarm-cluster/kubernetes
+```
 
 ## Configure your sample Swarm deployment
 
@@ -141,7 +147,7 @@ kubectl -n $NAMESPACE apply -f tiller.rbac.yaml
 # Start tiller in your namespace
 helm init --service-account tiller --tiller-namespace $NAMESPACE
 
-# Install sample Swarm chart
+# Install sample Swarm chart. It may take longer, like a couple of minutes
 helm --tiller-namespace=$NAMESPACE \
      --namespace=$NAMESPACE \
      --name=swarm install ethersphere-charts/swarm \
