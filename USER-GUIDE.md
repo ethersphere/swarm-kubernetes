@@ -13,6 +13,13 @@ This document is targeted at developers who want to use a Kubernetes environment
 
 ### Requirements
 
+#### Ask an AWS admin 
+
+Ask someone on your team with AWS admin rights to create an account for you. You'll get
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- your-name (this is your username and your namespace)
+
 #### Install aws-cli >= 1.16
 
 https://aws.amazon.com/cli/
@@ -21,10 +28,15 @@ https://aws.amazon.com/cli/
 
 ```
 aws configure
-
-export AWS_ACCESS_KEY_ID="xxx"
-export AWS_SECRET_ACCESS_KEY="xxx"
 ```
+Here is what it asks for and what you enter
+- AWS_ACCESS_KEY_ID: what you got from the admin
+- AWS_SECRET_ACCESS_KEY: what you got from the admin
+- Region: us-east-1
+- OUtput format: leave it blank
+
+The values will be stored under `.aws/`. If you want to override them when running a command, you can export the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env vars.
+
 
 #### Install [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
 
@@ -57,8 +69,9 @@ export NAMESPACE=your-namespace
 ## Configure kubectl
 
 ```
-aws eks update-kubeconfig --name your-cluster-name
+aws eks update-kubeconfig --name swarm-stg
 ```
+The name of the cluster is `swarm-stg`. You can get a list of clusters running `aws eks list-clusters`.
 
 ## Confirm access to K8s cluster
 
